@@ -13,3 +13,8 @@ class Door_sensor:
 
         def get_state():
             return GPIO.input(self.pin_number)
+            
+GPIO.setmode(GPIO.BCM)
+door_test = Door_sensor(pin_number=18)
+door_test.setup()
+print(door_test.get_state())
