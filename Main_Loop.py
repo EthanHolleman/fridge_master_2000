@@ -14,8 +14,19 @@ DHT = DHT_22(pin=)
 freezer_sensor.setup()
 fridge_sensor.setup()
 
+
+'''
+Features to add
+Send text message once door has been closed after warning
+Cool down on warning messages 10 mins or sor
+'''
+
 SLEEP_TIME = 5
 open_times = [0,0]
+last_warning = 0.0
+warning_wait_seconds = 900
+allowed_temp = 60
+allowed_open = 900
 while True():
 
     # read from all sensors
@@ -33,12 +44,16 @@ while True():
         open_times[1] = 0
 
     humidity, temp = DHT.read_temp_hum()
-    if temp <= 60:
-        # send text message warning
+    time_since_last_warning = time.perf_counter-last_warning
+    allow_warning = time_since_last_warning >= warning_wait_seconds
 
-
-
-
-
-
-    humidity, temp = DHT.read_temp_hum()
+    if allow_warning is True:
+        if temp >= allowed_temp:
+            # send message and log
+            pass
+        if open_times[0] >= allowed_open:
+            # send message
+            pass
+        if open_times[1] >= allowed_open:
+            # send message
+            pass
