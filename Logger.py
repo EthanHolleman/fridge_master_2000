@@ -12,17 +12,10 @@ def check_for_log(log_path):
             writer = csv.writer(log, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             write.writerow(header)
 
-def write_entry(log_path, temp, humidity, allow_warning, warning, fridge, freezer):
+def write_entry(data_list):
     try:
         with open(log_path, 'a') as log:
             writer = csv.writer(log, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow([str(datetime.datetime),
-                             temp,
-                             humidity,
-                             allow_warning,
-                             warning,
-                             fridge,
-                             freezer])
+            writer.writerow(data_list)
     except FileNotFoundError as e:
         return e
-        

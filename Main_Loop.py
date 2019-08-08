@@ -1,59 +1,73 @@
 from DHT_22 import DHT_22
 from Door_Sensor import Door_sensor
+from Control_Functions import *
+from Texter import *
+from Logger import *
 import RPi.GPIO as GPIO
 import time
 import datetime
 
-GPIO.setmode(GPIO.BMC)
+GPIO.setmode(GPIO.BCM)
 # intialize all sensor objects
 freezer_sensor = Door_sensor(pin_number=)
 fridge_sensor = Door_sensor(pin_number=)
 DHT = DHT_22(pin=)
+lcd = LCD()
 
-# setup door sensors
-freezer_sensor.setup()
-fridge_sensor.setup()
+# constants
+MAX_TEMP = 55  # degrees F
+MAX_OPEN = 900  # seconds
+FRIDGE_OPEN_CODE = 0
+FREEZ_OPEN_CODE = 1
+WARN_WAIT = 900  # seconds
+WAIT = 5  # seconds
 
-
-'''
-Features to add
-Send text message once door has been closed after warning
-Cool down on warning messages 10 mins or sor
-'''
-
-SLEEP_TIME = 5
-open_times = [0,0]
+# loop variables
 last_warning = 0.0
-warning_wait_seconds = 900
-allowed_temp = 60
-allowed_open = 900
-while True():
+fre_time_open = 0
+fri_time_open = 0
+loop_counter = 0
 
-    # read from all sensors
-    fridge_state = fridge_sensor.get_state()
-    freezer_state = freezer_state.get_state()
-    time.sleep(SLEEP_TIME)
+while True:
+    loop_data = [datetime.datetime.now().date(), datetime.datetime.now().time()]
+    fridge, freezer, hum, temp = read_all_sensors(fridge_sensor, freezer_sensor, DHT)
 
-    if frige_state is open:
-        open_times[0] += SLEEP_TIME
-    else:
-        open_times[0] = 0
-    if freezer_state is open: # change from open to open output
-        open_times[1] += SLEEP_TIME
-    else:
-        open_times[1] = 0
+    loop_data.append(fridge, freezer, hum, temp)
+    # all LCD messages should be included between start_time and difference
+    # otherwise door timer will not be accurate
+    # currently ignoring non sleep time
 
-    humidity, temp = DHT.read_temp_hum()
-    time_since_last_warning = time.perf_counter-last_warning
-    allow_warning = time_since_last_warning >= warning_wait_seconds
+    start_time = time.perf_counter()
+    lcd.print_logo(WAIT)
+    lcd.print_temp_hum(temp, hum, WAIT)
+    lcd.print_time(WAIT)
+    lcd.print_pi_info(WAIT)
+    differnece = time.perf_counter() - start_time  # time for all displays to happen
+    # difference is added to open times if state switches is 1 (open)
+
+    fre_time_open, fri_time_open = door_timer(fridge,  # calculate time doors have been open
+                                              freezer,
+                                              fre_time_open,
+                                              fri_time_open,
+                                              differnece)
+
+    loop_data.append(fre_time_open, fri_time_open)  # add open times to loop data
+
+    high_temp = temp_monitor(temp, MAX_TEMP)  # check if temp is too high; bool
+    left_open, open_code = door_monitor(fre_time_open, fri_time_open, MAX_OPEN)
+    # check if doors have been open longer than allowed
+    allow_warning = allow_warning(last_warning, WARN_WAIT)  # boolean
 
     if allow_warning is True:
-        if temp >= allowed_temp:
-            # send message and log
-            pass
-        if open_times[0] >= allowed_open:
-            # send message
-            pass
-        if open_times[1] >= allowed_open:
-            # send message
-            pass
+        if left_open is True
+            if open_code == 0:
+                alarm(fri_alarm=True, open_time=fri_time_open)
+            else:
+                alarm(fre_alarm=True, open_time=fre_time_open)
+            last_warning = time.perf_counter()  # update time of last warning
+        if high_temp is True:
+            alarm(temp_alarm=True, temp=temp)
+            last_warning = time.perf_counter()  # update time of last warning
+
+    loop_counter += 1
+    write_entry(loop_data)  # all data collected in loop_data written here

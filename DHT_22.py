@@ -1,4 +1,4 @@
-
+import time
 import RPi.GPIO as GPIO
 import Adafruit_DHT
 
@@ -15,3 +15,10 @@ class DHT_22():
             return tuple(hum, temp)
         else:
             return False
+
+GPIO.setmode(GPIO.BCM)
+test_DHT = DHT_22(4)
+
+while True:
+    print(read_temp_hum())
+    time.sleep(2)
