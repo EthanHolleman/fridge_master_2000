@@ -7,20 +7,25 @@ import RPi.GPIO as GPIO
 import time
 import datetime
 
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BCM)  # set pin labeling scheme DO NOT CHANGE
+
 # intialize all sensor objects
 freezer_sensor = Door_sensor(pin_number=)
 fridge_sensor = Door_sensor(pin_number=)
 DHT = DHT_22(pin=)
 lcd = LCD()
 
-# constants
+# sensor constants
 MAX_TEMP = 55  # degrees F
 MAX_OPEN = 900  # seconds
 FRIDGE_OPEN_CODE = 0
 FREEZ_OPEN_CODE = 1
 WARN_WAIT = 900  # seconds
 WAIT = 5  # seconds
+
+# file directories
+LOG_DIR = ''  # add before running
+log_file = os.path.join(LOG_DIR, datetime.datetime.now().date() + '.csv')
 
 # loop variables
 last_warning = 0.0
@@ -38,10 +43,11 @@ while True:
     # currently ignoring non sleep time
 
     start_time = time.perf_counter()
-    lcd.print_logo(WAIT)
-    lcd.print_temp_hum(temp, hum, WAIT)
-    lcd.print_time(WAIT)
-    lcd.print_pi_info(WAIT)
+    lcd.clear()
+    lcd.print_temp_hum(temp, hum, display_time=WAIT)
+    lcd.print_time(display_time=WAIT)
+    lcd.print_pi_info(display_time=WAIT)
+    lcd.print_logo(display_time=WAIT, clear=False)  # clear == False so logo remains while rest loop runs
     differnece = time.perf_counter() - start_time  # time for all displays to happen
     # difference is added to open times if state switches is 1 (open)
 
@@ -70,4 +76,7 @@ while True:
             last_warning = time.perf_counter()  # update time of last warning
 
     loop_counter += 1
-    write_entry(loop_data)  # all data collected in loop_data written here
+    logger(LOG_DIR, log_file, loop_data)
+    # all data collected in loop_data written here
+    # current data format for entry
+    # date, time, fridge, freezer, hum, temp, fre_time_open, fri_time_open
