@@ -35,7 +35,7 @@ def door_monitor(fre_open, fri_open, max_open_time):
 
 
 def temp_monitor(temp, allowed_max_temp):
-    if int(temp) > allowed_max_temp:
+    if float(temp) > allowed_max_temp:
         return True
     else:
         return False
