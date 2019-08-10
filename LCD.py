@@ -67,22 +67,3 @@ class LCD():
     def wait_clear(self, display_time):
         time.sleep(display_time)
         self.display.clear()
-
-lcd_rs = 25
-lcd_en = 24
-lcd_d4 = 23
-lcd_d5 = 17
-lcd_d6 = 18
-lcd_d7 = 22
-lcd_backlight = 2
-lcd_columns = 16
-lcd_rows = 2
-lcd = LCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6,
-          lcd_d7, lcd_columns, lcd_rows, lcd_backlight)
-
-
-lcd.print_logo(display_time=5, clear=True)
-lcd.print_time(display_time=5, clear=True)
-lcd.print_temp_hum(40, 50, display_time=5, clear=True)
-lcd.print_pi_info(display_time=5, clear=True)
-lcd.print_special(5)

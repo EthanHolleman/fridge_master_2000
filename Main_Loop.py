@@ -38,7 +38,7 @@ WAIT = 5  # seconds
 
 # file directories
 LOG_DIR = '/Documents/fridge_master'  # add before running
-log_file = os.path.join(LOG_DIR, datetime.datetime.now().date() + '.csv')
+log_file = os.path.join(LOG_DIR, str(datetime.datetime.now().date()) + '.csv')
 
 # loop variables
 last_warning = 0.0
