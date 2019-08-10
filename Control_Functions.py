@@ -13,7 +13,7 @@ def read_all_sensors(fridge_sensor, freezer_sensor, DHT):
 
 
 def door_timer(fridge_state, freezer_state, fri_open, fre_open, time):
-    if frige_state is 1:
+    if fridge_state is 1:
         fri_open += time
     else:
         fri_open = 0
