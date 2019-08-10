@@ -19,26 +19,26 @@ class LCD():
         self.backlight = backlight
         self.display = Ada_LCD.Adafruit_CharLCD(rs, en, d4, d5, d6, d7, cols, rows, backlight)
 
-    def print_temp_hum(self, temp, humidity, display_time=0, clear=False):
+    def print_temp_hum(self, temp, humidity, display_time=0, clear=True):
         message = 'Temp = {}\nHumidity = {}'.format(temp, humidity)
         self.display.message(message)
         if clear is True:
             self.wait_clear(display_time)
         return message
 
-    def print_time(self, display_time=0, clear=False):
+    def print_time(self, display_time=0, clear=True):
         date = str(datetime.datetime.now().date())
         time = str(datetime.datetime.now().time())[0:-7]
         self.display.message('{}\n{}'.format(time, date))
         if clear is True:
             self.wait_clear(display_time)
 
-    def print_logo(self, display_time=0, clear=False):
+    def print_logo(self, display_time=0, clear=True):
         self.display.message('FRIDGE MASTER\n    2000')
         if clear is True:
             self.wait_clear(display_time)
 
-    def print_pi_info(self, display_time=0, clear=False):
+    def print_pi_info(self, display_time=0, clear=True):
         CPU_temp = subprocess.check_output(
             ['cat', '/sys/class/thermal/thermal_zone0/temp'])
         CPU_temp = str(int(CPU_temp.strip()) / 1000)
