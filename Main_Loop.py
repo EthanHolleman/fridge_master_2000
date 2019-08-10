@@ -70,6 +70,7 @@ while True:
     lcd.print_logo(display_time=WAIT, clear=False)
     differnece = time.perf_counter() - start_time  # time for all displays
     # difference is added to open times if state switches is 1 (open)
+    print('The diff is {}'.format(differnece))
 
     fre_time_open, fri_time_open = door_timer(fridge,  # find time doors open
                                               freezer,
@@ -85,6 +86,7 @@ while True:
     left_open, open_code = door_monitor(fre_time_open, fri_time_open, MAX_OPEN)
     # check if doors have been open longer than allowed
     allow_warning = allow_warning(last_warning, WARN_WAIT)  # boolean
+    print('Allo Warning: '.format(allow_warning))
 
     if allow_warning is True:
         if left_open is True:
