@@ -31,10 +31,7 @@ def new_log(log_dir, current_log):
         return current_log
 
 def check_log_exists(log_dir):
-    try:
-        open(log_dir)
-        log_dir.close()
-    except FileNotFoundError:
+    if os.path.isfile(log_dir) is False:
         with open(log_dir, 'w') as log:
             writer = csv.writer(log_file, delimiter=',',
                                 quotechar='"', quoting=csv.QUOTE_MINIMAL)
