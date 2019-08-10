@@ -33,7 +33,7 @@ def new_log(log_dir, current_log):
 def check_log_exists(log_dir):
     if os.path.isfile(log_dir) is False:
         with open(log_dir, 'w+') as log:
-            writer = csv.writer(log_file, delimiter=',',
+            writer = csv.writer(log, delimiter=',',
                                 quotechar='"', quoting=csv.QUOTE_MINIMAL)
             writer.writerow(HEADER)
 
