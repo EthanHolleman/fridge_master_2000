@@ -9,7 +9,7 @@ def read_all_sensors(fridge_sensor, freezer_sensor, DHT):
     freezer_state = freezer_sensor.get_state()
     humidity, temp = DHT.read_temp_hum()
 
-    return tuple(fridge_state, freezer_state, humidity, temp)
+    return tuple([fridge_state, freezer_state, humidity, temp])
 
 
 def door_timer(fridge_state, freezer_state, fri_open, fre_open, time):
@@ -22,16 +22,16 @@ def door_timer(fridge_state, freezer_state, fri_open, fre_open, time):
     else:
         fre_open = 0
 
-    return tuple(fre_open, fri_open)
+    return tuple([fre_open, fri_open])
 
 
 def door_monitor(fre_open, fri_open, max_open_time):
     if fre_open > max_open_time:
-        return tuple(True, 1)
+        return tuple([True, 1])
     elif fri_open > max_open_time:
-        return tuple(True, 0)
+        return tuple([True, 0])
     else:
-        return tuple(False, None)
+        return tuple([False, None])
 
 
 def temp_monitor(temp, allowed_max_temp):
