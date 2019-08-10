@@ -85,7 +85,7 @@ while True:
 
     if allow_warning is True:
         if left_open is True:
-           if open_code == 0:
+            if open_code == 0:
                 alarm(fri_alarm=True, open_time=fri_time_open)
             else:
                 alarm(fre_alarm=True, open_time=fre_time_open)
