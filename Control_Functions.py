@@ -6,7 +6,7 @@ from Texter import *
 
 def read_all_sensors(fridge_sensor, freezer_sensor, DHT):
     fridge_state = fridge_sensor.get_state()
-    freezer_state = freezer_state.get_state()
+    freezer_state = freezer_sensor.get_state()
     humidity, temp = DHT.read_temp_hum()
 
     return tuple(fridge_state, freezer_state, humidity, temp)
