@@ -1,11 +1,13 @@
 from DHT_22 import DHT_22
 from Door_Sensor import Door_sensor
 from Control_Functions import *
+from LCD import LCD
 from Texter import *
 from Logger import *
 import RPi.GPIO as GPIO
 import time
 import datetime
+import Adafruit_CharLCD as Ada_LCD
 
 GPIO.setmode(GPIO.BCM)  # set pin labeling scheme DO NOT CHANGE
 
