@@ -37,7 +37,7 @@ WARN_WAIT = 900  # seconds
 WAIT = 5  # seconds
 
 # file directories
-LOG_DIR = '/Documents/fridge_master'  # add before running
+LOG_DIR = '/Documents/fridge_master_2000'  # add before running
 log_file = os.path.join(LOG_DIR, str(datetime.datetime.now().date()) + '.csv')
 
 # loop variables
