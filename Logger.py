@@ -22,7 +22,7 @@ def new_log(log_dir, current_log):
 
     if log_date is not current_day:
         new_log = os.path.join(log_dir, current_day + '.csv')
-        with open(new_log, 'w'):
+        with open(new_log, 'w+'):
             writer = csv.writer(new_log, delimiter=',',
                                 quotechar='"', quoting=csv.QUOTE_MINIMAL)
             writer.writerow(HEADER)
@@ -32,7 +32,7 @@ def new_log(log_dir, current_log):
 
 def check_log_exists(log_dir):
     if os.path.isfile(log_dir) is False:
-        with open(log_dir, 'w') as log:
+        with open(log_dir, 'w+') as log:
             writer = csv.writer(log_file, delimiter=',',
                                 quotechar='"', quoting=csv.QUOTE_MINIMAL)
             writer.writerow(HEADER)
