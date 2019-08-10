@@ -56,6 +56,7 @@ while True:
         fridge_sensor, freezer_sensor, DHT)
 
     loop_data.append(fridge, freezer, hum, temp)
+    print(loop_data)
     # all LCD messages should be included between start_time and difference
     # otherwise door timer will not be accurate
     # currently ignoring non sleep time

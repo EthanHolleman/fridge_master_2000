@@ -23,7 +23,7 @@ class LCD():
         message = self.display.message(
             'Temp = {}\nHumidity = {}'.format(temp, humidity))
         if clear is True:
-            wait_clear(display_time)
+            self.wait_clear(display_time)
         return message
 
     def print_time(self, display_time=0, clear=False):
@@ -31,23 +31,21 @@ class LCD():
         time = str(datetime.datetime.now().time())[0:-7]
         self.display.message('{}\n{}'.format(time, date))
         if clear is True:
-            wait_clear(display_time)
+            self.wait_clear(display_time)
 
     def print_logo(self, display_time=0, clear=False):
         self.display.message('FRIDGE MASTER\n    2000')
         if clear is True:
-            wait_clear(display_time)
+            self.wait_clear(display_time)
 
     def print_pi_info(self, display_time=0, clear=False):
         CPU_temp = subprocess.check_output(
             ['cat', '/sys/class/thermal/thermal_zone0/temp'])
         CPU_temp = str(int(CPU_temp.strip()) / 1000)
-        GPU_temp = subprocess.check_output(['vcgencmd', 'measure_temp'])[5:9]
-
-        message = 'CPU Temp: {}C\nGPU Temp: {}C'.format(CPU_temp, GPU_temp)
+        message = 'CPU Temp: {}'.format(CPU_temp)
         self.display(message)
         if clear is True:
-            wait_clear(display_time)
+            self.wait_clear(display_time)
 
     def print_special(self, WAIT):
         kill, help, aware, maybe = 1, 2, 3, 4
@@ -64,7 +62,7 @@ class LCD():
         elif rand is maybe:
             self.display.message('ARE FEELINGS\nWORTH IT?')
 
-        wait_clear(WAIT)
+        self.wait_clear(WAIT)
 
     def wait_clear(self, display_time):
         time.sleep(display_time)
@@ -77,11 +75,8 @@ lcd_d5 = 17
 lcd_d6 = 18
 lcd_d7 = 22
 lcd_backlight = 2
-
-# Define LCD column and row size for 16x2 LCD.
 lcd_columns = 16
 lcd_rows = 2
-
 lcd = LCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6,
           lcd_d7, lcd_columns, lcd_rows, lcd_backlight)
 
