@@ -78,7 +78,8 @@ while True:
                                               differnece)
 
     # add open times to loop data
-    loop_data.append(fre_time_open, fri_time_open)
+    loop_data.append(fre_time_open)
+    loop_data.append(fri_time_open)
 
     high_temp = temp_monitor(temp, MAX_TEMP)  # check if temp is too high; bool
     left_open, open_code = door_monitor(fre_time_open, fri_time_open, MAX_OPEN)
