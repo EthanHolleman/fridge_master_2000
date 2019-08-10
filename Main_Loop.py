@@ -10,9 +10,21 @@ import datetime
 GPIO.setmode(GPIO.BCM)  # set pin labeling scheme DO NOT CHANGE
 
 # intialize all sensor objects
-freezer_sensor = Door_sensor(pin_number=)
-fridge_sensor = Door_sensor(pin_number=)
-DHT = DHT_22(pin=)
+lcd_rs = 25
+lcd_en = 24
+lcd_d4 = 23
+lcd_d5 = 17
+lcd_d6 = 18
+lcd_d7 = 22
+lcd_backlight = 2
+lcd_columns = 16
+lcd_rows = 2
+lcd = LCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6,
+          lcd_d7, lcd_columns, lcd_rows, lcd_backlight)
+
+freezer_sensor = Door_sensor(pin_number=21)  # add during wiring
+fridge_sensor = Door_sensor(pin_number=5)   # add during wiring
+DHT = DHT_22(pin=2)
 lcd = LCD()
 
 # sensor constants
@@ -33,9 +45,13 @@ fre_time_open = 0
 fri_time_open = 0
 loop_counter = 0
 
+
+
 while True:
-    loop_data = [datetime.datetime.now().date(), datetime.datetime.now().time()]
-    fridge, freezer, hum, temp = read_all_sensors(fridge_sensor, freezer_sensor, DHT)
+    loop_data = [datetime.datetime.now().date(),
+                 datetime.datetime.now().time()]
+    fridge, freezer, hum, temp = read_all_sensors(
+        fridge_sensor, freezer_sensor, DHT)
 
     loop_data.append(fridge, freezer, hum, temp)
     # all LCD messages should be included between start_time and difference
@@ -43,21 +59,24 @@ while True:
     # currently ignoring non sleep time
 
     start_time = time.perf_counter()
-    lcd.clear()
-    lcd.print_temp_hum(temp, hum, display_time=WAIT)
-    lcd.print_time(display_time=WAIT)
-    lcd.print_pi_info(display_time=WAIT)
-    lcd.print_logo(display_time=WAIT, clear=False)  # clear == False so logo remains while rest loop runs
-    differnece = time.perf_counter() - start_time  # time for all displays to happen
+    lcd.display.clear()
+    lcd.display.print_temp_hum(temp, hum, display_time=WAIT)
+    lcd.display.print_time(display_time=WAIT)
+    lcd.display.print_pi_info(display_time=WAIT)
+    #lcs.print_special(WAIT)
+    # clear == False so logo remains while rest loop runs
+    lcd.display.print_logo(display_time=WAIT, clear=False)
+    differnece = time.perf_counter() - start_time  # time for all displays
     # difference is added to open times if state switches is 1 (open)
 
-    fre_time_open, fri_time_open = door_timer(fridge,  # calculate time doors have been open
+    fre_time_open, fri_time_open = door_timer(fridge,  # find time doors open
                                               freezer,
                                               fre_time_open,
                                               fri_time_open,
                                               differnece)
 
-    loop_data.append(fre_time_open, fri_time_open)  # add open times to loop data
+    # add open times to loop data
+    loop_data.append(fre_time_open, fri_time_open)
 
     high_temp = temp_monitor(temp, MAX_TEMP)  # check if temp is too high; bool
     left_open, open_code = door_monitor(fre_time_open, fri_time_open, MAX_OPEN)
@@ -65,8 +84,8 @@ while True:
     allow_warning = allow_warning(last_warning, WARN_WAIT)  # boolean
 
     if allow_warning is True:
-        if left_open is True
-            if open_code == 0:
+        if left_open is True:
+           if open_code == 0:
                 alarm(fri_alarm=True, open_time=fri_time_open)
             else:
                 alarm(fre_alarm=True, open_time=fre_time_open)
