@@ -100,6 +100,7 @@ while True:
             last_warning = time.perf_counter()  # update time of last warning
 
     loop_counter += 1
+    check_log_exists(log_file)
     logger(LOG_DIR, log_file, loop_data)
     # all data collected in loop_data written here
     # current data format for entry

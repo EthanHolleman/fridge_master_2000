@@ -2,20 +2,20 @@ import os
 import csv
 import datetime
 
+HEADER = ['Date',
+          'Time',
+          'Fri_Sensor',
+          'Fre_Sensor',
+          'Humidity',
+          'Temp',
+          'Fre Time Open',
+          'Fri Time Open']
+
 
 def new_log(log_dir, current_log):
     '''
     Determine if it is a new day and if a new log should be created
     '''
-
-    HEADER = ['Date',
-              'Time',
-              'Fri_Sensor',
-              'Fre_Sensor',
-              'Humidity',
-              'Temp',
-              'Fre Time Open',
-              'Fri Time Open']
 
     log_date = current_log.split('.')[0]
     current_day = str(datetime.datetime.now().date())
@@ -29,6 +29,16 @@ def new_log(log_dir, current_log):
         return new_log
     else:
         return current_log
+
+def check_log_exists(log_dir):
+    try:
+        open(log_dir)
+        log_dir.close()
+    except FileNotFoundError:
+        with open(log_dir, 'w') as log:
+            writer = csv.writer(log_file, delimiter=',',
+                                quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            writer.writerow(HEADER)
 
 
 def logger(log_dir, current_log, row):
