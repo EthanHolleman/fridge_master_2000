@@ -20,8 +20,8 @@ class LCD():
         self.display = Ada_LCD.Adafruit_CharLCD(rs, en, d4, d5, d6, d7, cols, rows, backlight)
 
     def print_temp_hum(self, temp, humidity, display_time=0, clear=False):
-        message = self.display.message(
-            'Temp = {}\nHumidity = {}'.format(temp, humidity))
+        message = 'Temp = {}\nHumidity = {}'.format(temp, humidity)
+        self.display.message(message)
         if clear is True:
             self.wait_clear(display_time)
         return message

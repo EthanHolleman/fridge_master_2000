@@ -62,12 +62,12 @@ while True:
 
     start_time = time.perf_counter()
     lcd.display.clear()
-    lcd.display.print_temp_hum(temp, hum, display_time=WAIT)
-    lcd.display.print_time(display_time=WAIT)
-    lcd.display.print_pi_info(display_time=WAIT)
+    lcd.print_temp_hum(temp, hum, display_time=WAIT)
+    lcd.print_time(display_time=WAIT)
+    lcd.print_pi_info(display_time=WAIT)
     #lcs.print_special(WAIT)
     # clear == False so logo remains while rest loop runs
-    lcd.display.print_logo(display_time=WAIT, clear=False)
+    lcd.print_logo(display_time=WAIT, clear=False)
     differnece = time.perf_counter() - start_time  # time for all displays
     # difference is added to open times if state switches is 1 (open)
 
