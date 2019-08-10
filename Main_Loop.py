@@ -27,7 +27,6 @@ lcd = LCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6,
 freezer_sensor = Door_sensor(pin_number=21)  # add during wiring
 fridge_sensor = Door_sensor(pin_number=5)   # add during wiring
 DHT = DHT_22(pin=2)
-lcd = LCD()
 
 # sensor constants
 MAX_TEMP = 55  # degrees F
@@ -38,7 +37,7 @@ WARN_WAIT = 900  # seconds
 WAIT = 5  # seconds
 
 # file directories
-LOG_DIR = ''  # add before running
+LOG_DIR = '/Documents/fridge_master'  # add before running
 log_file = os.path.join(LOG_DIR, datetime.datetime.now().date() + '.csv')
 
 # loop variables
