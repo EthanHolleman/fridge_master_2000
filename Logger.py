@@ -18,7 +18,7 @@ def new_log(log_dir, current_log):
               'Fri Time Open']
 
     log_date = current_log.split('.')[0]
-    current_day = datetime.datetime.now().date()
+    current_day = str(datetime.datetime.now().date())
 
     if log_date is not current_day:
         new_log = os.path.join(log_dir, current_day + '.csv')
