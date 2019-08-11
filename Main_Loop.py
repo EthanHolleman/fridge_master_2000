@@ -37,7 +37,7 @@ WARN_WAIT = 600  # seconds
 WAIT = 5  # seconds
 
 # file directories
-LOG_DIR = './logs'  # add before running
+LOG_DIR = '/home/pi/FTP/files'  # add before running
 log_file = os.path.join(LOG_DIR, str(datetime.datetime.now().date()) + '.csv')
 
 # loop variables
@@ -103,7 +103,7 @@ while True:
     print(log_file)
     check_log_exists(log_file)
     print(log_file)
-#    logger(LOG_DIR, log_file, loop_data)
+    logger(LOG_DIR, log_file, loop_data)
     # all data collected in loop_data written here
     # current data format for entry
     # date, time, fridge, freezer, hum, temp, fre_time_open, fri_time_open
