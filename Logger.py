@@ -18,24 +18,26 @@ def new_log(log_dir, current_log):
     '''
 
     log_date = current_log.split('.')[0]
+    log_date = os.path.basename(log_date)
     current_day = str(datetime.datetime.now().date())
     print(current_log)
-    print(log_date)
+    print(log_date + 'this is log date')
     print(current_day)
-    print(current_day == log_date)
-    if log_date is not current_day:
-        new_log = os.path.join(log_dir, current_day + '.csv')
-        with open(new_log, 'w+') as new_log:
-            writer = csv.writer(new_log, delimiter=',',
+    test = current_day == log_date
+    if test is False:
+       print('does not match')
+       new_log = os.path.join(log_dir, current_day + '.csv')
+       with open(new_log, 'w+') as new_log:
+           writer = csv.writer(new_log, delimiter=',',
                                 quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow(HEADER)
-        return new_log
+           writer.writerow(HEADER)
+       return new_log.name
     else:
-        return current_log
+        return os.path.join(log_dir, current_day + '.csv') 
 
-def check_log_exists(log_dir):
-    if os.path.isfile(log_dir) is False:
-        with open(log_dir, 'w+') as log:
+def check_log_exists(log_file):
+    if os.path.isfile(log_file) is False:
+        with open(log_file, 'w+') as log:
             writer = csv.writer(log, delimiter=',',
                                 quotechar='"', quoting=csv.QUOTE_MINIMAL)
             writer.writerow(HEADER)
@@ -48,10 +50,11 @@ def logger(log_dir, current_log, row):
     be created.
     '''
     log_file = new_log(log_dir, current_log)
+    print(log_file)
+    print('Log file above')
     try:
-        with open(log_file, 'a'):
-            writer = csv.writer(log_file, delimiter=',',
-                                quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        with open(log_file, 'a') as log_file:
+            writer = csv.writer(log_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             writer.writerow(row)
     except FileNotFoundError as e:
         return e
