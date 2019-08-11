@@ -4,7 +4,7 @@ import time
 from Texter import *
 
 def c_to_f(temp):
-    return (temp * 1.8) + 32
+    return (float(temp) * 1.8) + 32
 
 
 def read_all_sensors(fridge_sensor, freezer_sensor, DHT):
