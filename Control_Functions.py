@@ -3,11 +3,15 @@ import subprocess
 import time
 from Texter import *
 
+def c_to_f(temp):
+    return (temp * 1.8) + 32
+
 
 def read_all_sensors(fridge_sensor, freezer_sensor, DHT):
     fridge_state = fridge_sensor.get_state()
     freezer_state = freezer_sensor.get_state()
     humidity, temp = DHT.read_temp_hum()
+    temp = c_to_f(temp)
 
     return tuple([fridge_state, freezer_state, humidity, temp])
 

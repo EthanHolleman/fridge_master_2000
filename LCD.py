@@ -3,6 +3,7 @@ import random
 import datetime
 import Adafruit_CharLCD as Ada_LCD
 import subprocess
+from Control_Functions import c_to_f
 
 
 class LCD():
@@ -41,7 +42,7 @@ class LCD():
     def print_pi_info(self, display_time=0, clear=True):
         CPU_temp = subprocess.check_output(
             ['cat', '/sys/class/thermal/thermal_zone0/temp'])
-        CPU_temp = str(int(CPU_temp.strip()) / 1000)
+        CPU_temp = str(c_to_f(int(CPU_temp.strip()) / 1000))
         message = 'CPU Temp: {}'.format(CPU_temp)
         self.display.message(message)
         if clear is True:
