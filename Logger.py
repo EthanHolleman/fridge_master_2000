@@ -28,7 +28,7 @@ def new_log(log_dir, current_log):
        print('does not match')
        new_log = os.path.join(log_dir, current_day + '.csv')
        with open(new_log, 'w+') as new_log:
-           writer = csv.writer(new_log, delimiter=',',
+           writer = csv.writer(new_log, delimiter=','
                                 quotechar='"', quoting=csv.QUOTE_MINIMAL)
            writer.writerow(HEADER)
        return new_log.name
