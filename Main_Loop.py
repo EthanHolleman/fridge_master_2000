@@ -29,11 +29,11 @@ fridge_sensor = Door_sensor(pin_number=5)   # add during wiring
 DHT = DHT_22(pin=2)
 
 # sensor constants
-MAX_TEMP = 55  # degrees F
-MAX_OPEN = 900  # seconds
+MAX_TEMP = 17  # degrees C
+MAX_OPEN = 300  # seconds
 FRIDGE_OPEN_CODE = 0
 FREEZ_OPEN_CODE = 1
-WARN_WAIT = 900  # seconds
+WARN_WAIT = 600  # seconds
 WAIT = 5  # seconds
 
 # file directories
@@ -65,9 +65,9 @@ while True:
     lcd.print_temp_hum(temp, hum, display_time=WAIT)
     lcd.print_time(display_time=WAIT)
     lcd.print_pi_info(display_time=WAIT)
-    #lcs.print_special(WAIT)
+    lcd.print_special(WAIT)
     # clear == False so logo remains while rest loop runs
-    lcd.print_logo(display_time=WAIT, clear=False)
+    lcd.print_logo(display_time=WAIT, clear=True)
     differnece = time.perf_counter() - start_time  # time for all displays
     # difference is added to open times if state switches is 1 (open)
     print('The diff is {}'.format(differnece))
@@ -85,10 +85,10 @@ while True:
     high_temp = temp_monitor(temp, MAX_TEMP)  # check if temp is too high; bool
     left_open, open_code = door_monitor(fre_time_open, fri_time_open, MAX_OPEN)
     # check if doors have been open longer than allowed
-    allow_warning = allow_warning(last_warning, WARN_WAIT)  # boolean
-    print('Allo Warning: '.format(allow_warning))
-
-    if allow_warning is True:
+    allow = allow_warning(last_warning, WARN_WAIT)  # boolean
+    print('Allow  Warning: {} '.format(allow))
+    print('Fridge Open: {} \n Freezer Time Open {}'.format(fri_time_open, fre_time_open))
+    if allow is True:
         if left_open is True:
             if open_code == 0:
                 alarm(fri_alarm=True, open_time=fri_time_open)
@@ -100,8 +100,10 @@ while True:
             last_warning = time.perf_counter()  # update time of last warning
 
     loop_counter += 1
+    print(log_file)
     check_log_exists(log_file)
-    logger(LOG_DIR, log_file, loop_data)
+    print(log_file)
+#    logger(LOG_DIR, log_file, loop_data)
     # all data collected in loop_data written here
     # current data format for entry
     # date, time, fridge, freezer, hum, temp, fre_time_open, fri_time_open

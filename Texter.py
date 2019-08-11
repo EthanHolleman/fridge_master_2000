@@ -13,7 +13,7 @@ def get_client():
 
 
 def compose_warnings(emergency_temp=False,
-                     emergency_frige=False,
+                     emergency_fridge=False,
                      emergency_freezer=False,
                      temp=None,
                      open_time=None):
@@ -31,9 +31,6 @@ def compose_warnings(emergency_temp=False,
     return warning
 
 
-def send_warnings(messages, client):
-    for message in messages:
-        client.messages \
-              .create(body=message,
-                      from_=TWILIO_NUMBER,
-                      to=NUMBER)
+def send_warnings(message, client):
+    print(message)
+    client.messages.create(body=message, from_=TWILIO_NUMBER, to=NUMBER)

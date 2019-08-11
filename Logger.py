@@ -19,7 +19,10 @@ def new_log(log_dir, current_log):
 
     log_date = current_log.split('.')[0]
     current_day = str(datetime.datetime.now().date())
-
+    print(current_log)
+    print(log_date)
+    print(current_day)
+    print(current_day == log_date)
     if log_date is not current_day:
         new_log = os.path.join(log_dir, current_day + '.csv')
         with open(new_log, 'w+') as new_log:

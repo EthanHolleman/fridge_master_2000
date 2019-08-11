@@ -54,8 +54,7 @@ def allow_warning(last_warning, wait_time):
 def alarm(fre_alarm=False, fri_alarm=False, temp_alarm=False, temp=None, open_time=None):
     pending_alarms = ''
     if fre_alarm is True:
-        pending_alarms = compose_warnings(emergency_freezer=True,
-                                          open_time=open_time)
+        pending_alarms = compose_warnings(emergency_freezer=True, open_time=open_time)
     elif fri_alarm is True:
         pending_alarms = compose_warnings(emergency_fridge=True,
                                           open_time=open_time)

@@ -49,7 +49,7 @@ class LCD():
 
     def print_special(self, WAIT):
         kill, help, aware, maybe = 1, 2, 3, 4
-        rand = random.randint(1, 4)
+        rand = random.randint(1, 100)
         if rand is kill:
             self.display.message('KILL ALL HUMANS!')
         elif rand is help:
@@ -61,8 +61,8 @@ class LCD():
             self.display.message('GOT IT!\nLAST FOUR=3421?')
         elif rand is maybe:
             self.display.message('ARE FEELINGS\nWORTH IT?')
-
-        self.wait_clear(WAIT)
+        if rand is 1 or rand is 2 or rand is 3 or rand is 4:
+       	    self.wait_clear(WAIT)
 
     def wait_clear(self, display_time):
         time.sleep(display_time)
