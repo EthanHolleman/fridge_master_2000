@@ -10,7 +10,7 @@ Currently Fridge Master 2000 is able to
 - Display the above plus date, time and CPU temp to an LCD
 - Log all measurements into csv files and upload them to local FTP server 
 
-Image of FRIDGE MASTER 2000
+## Image of FRIDGE MASTER 2000
 ![IMG_2816](https://user-images.githubusercontent.com/45807040/62834803-ed6a9b80-bc16-11e9-845e-3e3089cc9ee2.jpg)
 
 # Design Details 
