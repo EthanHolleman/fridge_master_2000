@@ -10,6 +10,22 @@ Currently Fridge Master 2000 is able to
 - Display the above plus date, time and CPU temp to an LCD
 - Log all measurements into csv files and upload them to local FTP server 
 
+## Image of FRIDGE MASTER 2000
 ![IMG_2816](https://user-images.githubusercontent.com/45807040/62834803-ed6a9b80-bc16-11e9-845e-3e3089cc9ee2.jpg)
+
+# Design Details 
+The images below are accurate to the FRIDGE MASTER design except the push switches are being used as stand ins for the magetic contact switches as the are functionally almost identical.
+The images below are also included in the Fritzing_Exports directory along with a bill of materials.
+
+## Breadboard Layout 
+
+![master_bb](https://user-images.githubusercontent.com/45807040/62887173-6397fc80-bd02-11e9-8ab4-d13cba7fb43d.png)
+
+
+## Schematic layout
+
+![mastermatic](https://user-images.githubusercontent.com/45807040/62887392-c25d7600-bd02-11e9-897b-03a98d74ef3a.png)
+
+
 
 Powered by raspberry pi zero 
