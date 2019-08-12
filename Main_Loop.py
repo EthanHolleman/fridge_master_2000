@@ -67,18 +67,17 @@ while True:
 
     start_time = time.perf_counter()
     lcd.display.clear()
-    append_door_read(open_dict, fridge_sensor, freezer_sensor)
     lcd.print_temp_hum(temp, hum, display_time=WAIT)
     append_door_read(open_dict, fridge_sensor, freezer_sensor)
     lcd.print_time(display_time=WAIT)
-    append_door_read(open_dict, fridge_sensor, freezer_sensor)
+    open_dict = append_door_read(open_dict, fridge_sensor, freezer_sensor)
     lcd.print_pi_info(display_time=WAIT)
-    append_door_read(open_dict, fridge_sensor, freezer_sensor)
+    open_dict = append_door_read(open_dict, fridge_sensor, freezer_sensor)
     lcd.print_special(WAIT)
-    append_door_read(open_dict, fridge_sensor, freezer_sensor)
+    open_dict = append_door_read(open_dict, fridge_sensor, freezer_sensor)
     # clear == False so logo remains while rest loop runs
     lcd.print_logo(display_time=WAIT, clear=True)
-    append_door_read(open_dict, fridge_sensor, freezer_sensor)
+    open_dict = append_door_read(open_dict, fridge_sensor, freezer_sensor)
 
     differnece = time.perf_counter() - start_time  # time for all displays
     # difference is added to open times if state switches is 1 (open)
@@ -87,7 +86,8 @@ while True:
 
     fre_time_open, fri_time_open = interp_door_dict(fri_time_open,
                                                     fre_time_open,
-                                                    open_dict)
+                                                    open_dict,
+                                                    WAIT)
 
     #fre_time_open, fri_time_open = door_timer(fridge,  # find time doors open
     #                                          freezer,
