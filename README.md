@@ -15,6 +15,7 @@ Currently Fridge Master 2000 is able to
 
 # Design Details 
 The images below are accurate to the FRIDGE MASTER design except the push switches are being used as stand ins for the magetic contact switches as the are functionally almost identical.
+The images below are also included in the Fritzing_Exports directory along with a bill of materials.
 
 ## Breadboard Layout 
 
