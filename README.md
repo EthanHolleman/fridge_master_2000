@@ -14,6 +14,7 @@ Image of FRIDGE MASTER 2000
 ![IMG_2816](https://user-images.githubusercontent.com/45807040/62834803-ed6a9b80-bc16-11e9-845e-3e3089cc9ee2.jpg)
 
 # Design Details 
+The images below are accurate to the FRIDGE MASTER design except the push switches are being used as stand ins for the magetic contact switches as the are functionally almost identical.
 
 ## Breadboard Layout 
 
