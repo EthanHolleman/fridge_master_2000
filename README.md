@@ -13,14 +13,15 @@ Currently Fridge Master 2000 is able to
 Image of FRIDGE MASTER 2000
 ![IMG_2816](https://user-images.githubusercontent.com/45807040/62834803-ed6a9b80-bc16-11e9-845e-3e3089cc9ee2.jpg)
 
-# Design details 
+# Design Details 
 
-Breadboard layout 
+## Breadboard Layout 
 
 ![master_bb](https://user-images.githubusercontent.com/45807040/62887173-6397fc80-bd02-11e9-8ab4-d13cba7fb43d.png)
 
 
-Scematic layout
+## Schematic layout
+
 ![mastermatic](https://user-images.githubusercontent.com/45807040/62887392-c25d7600-bd02-11e9-897b-03a98d74ef3a.png)
 
 
