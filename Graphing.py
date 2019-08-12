@@ -57,9 +57,9 @@ def going_higher():
 
     ax.scatter(x, y, z, c='g', marker='o', s=10)
 
-    ax.set_xlabel('X Label')
-    ax.set_ylabel('Y Label')
-    ax.set_zlabel('Z Label')
+    ax.set_xlabel('Temperature, C')
+    ax.set_ylabel('Time, 24hr')
+    ax.set_zlabel('Humidity, %')
 
     plt.show()
 going_higher()
