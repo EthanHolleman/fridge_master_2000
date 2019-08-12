@@ -34,7 +34,7 @@ MAX_OPEN = 300  # seconds
 FRIDGE_OPEN_CODE = 0
 FREEZ_OPEN_CODE = 1
 WARN_WAIT = 600  # seconds
-WAIT = 5  # seconds
+WAIT = 4  # seconds
 
 # file directories
 LOG_DIR = '/home/pi/FTP/files'  # add before running
@@ -71,6 +71,7 @@ while True:
     differnece = time.perf_counter() - start_time  # time for all displays
     # difference is added to open times if state switches is 1 (open)
     print('The diff is {}'.format(differnece))
+    fridge, freezer = read_doors(fridge_sensor, freezer_sensor)
 
     fre_time_open, fri_time_open = door_timer(fridge,  # find time doors open
                                               freezer,
@@ -100,7 +101,8 @@ while True:
             last_warning = time.perf_counter()  # update time of last warning
 
     loop_counter += 1
-    check_log_exists(log_file)
+    #check_log_exists(log_file)
+    log_file = new_log(LOG_DIR, log_file)
     logger(LOG_DIR, log_file, loop_data)
     # all data collected in loop_data written here
     # current data format for entry

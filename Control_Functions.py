@@ -4,14 +4,31 @@ import time
 from Texter import *
 
 def c_to_f(temp):
-    return (float(temp) * 1.8) + 32
+    return (temp * 1.8) + 32
 
+def read_doors(fridge, freezer):
+    return tuple([fridge.get_state(), freezer.get_state()])
+
+def append_door_read(dict, fridge_sensor, freezer_sensor):
+    fridge, freezer = read_doors(fridge_sensor, freezer_sensor)
+    dict['fridge'].append(fridge)
+    dict['freezer'].append(freezer)
+    return dict
+
+def interp_door_dict(fri_time_open, fre_time_open, dict, wait_time):
+    fri_hits = sum(dict['fridge'])
+    fre_hits = sum(dict['freezer'])
+
+    fri_time_open += wait_time * fri_hits
+    fre_time_open += wait_time * fre_hits
+
+    return tuple([fre_time_open, fri_time_open])
 
 def read_all_sensors(fridge_sensor, freezer_sensor, DHT):
     fridge_state = fridge_sensor.get_state()
     freezer_state = freezer_sensor.get_state()
     humidity, temp = DHT.read_temp_hum()
-    temp = c_to_f(temp)
+    temp = c_to_f(float(temp))
 
     return tuple([fridge_state, freezer_state, humidity, temp])
 

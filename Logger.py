@@ -33,7 +33,7 @@ def new_log(log_dir, current_log):
            writer.writerow(HEADER)
        return new_log.name
     else:
-        return os.path.join(log_dir, current_day + '.csv') 
+        return current_log
 
 def check_log_exists(log_file):
     if os.path.isfile(log_file) is False:
