@@ -1,7 +1,7 @@
 import datetime
 import subprocess
 import time
-from Messaging.Texter import *
+from Texter import *
 
 def c_to_f(temp):
     return (temp * 1.8) + 32

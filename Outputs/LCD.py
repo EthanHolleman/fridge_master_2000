@@ -3,7 +3,7 @@ import random
 import datetime
 import Adafruit_CharLCD as Ada_LCD
 import subprocess
-from Control_Functions import c_to_f
+from Controls.Control_Functions import c_to_f
 
 
 class LCD():
