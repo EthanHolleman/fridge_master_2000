@@ -29,7 +29,7 @@ fridge_sensor = Door_sensor(pin_number=5)   # add during wiring
 DHT = DHT_22(pin=2)
 
 # sensor constants
-MAX_TEMP = 17  # degrees C
+MAX_TEMP = 60  # degrees C
 MAX_OPEN = 300  # seconds
 FRIDGE_OPEN_CODE = 0
 FREEZ_OPEN_CODE = 1
