@@ -1,9 +1,9 @@
-from DHT_22 import DHT_22
-from Door_Sensor import Door_sensor
-from Control_Functions import *
-from LCD import LCD
-from Texter import *
-from Logger import *
+from Sensors.DHT_22 import DHT_22
+from Sensors.Door_Sensor import Door_sensor
+from Controls.Control_Functions import *
+from Outputs.LCD import LCD
+from Messaging.Texter import *
+from Records.Logger import *
 import RPi.GPIO as GPIO
 import time
 import datetime

@@ -49,7 +49,7 @@ def logger(log_dir, current_log, row):
     calls new_log to determine if the date has changed and a new log file should
     be created.
     '''
-    log_file = new_log(log_dir, current_log)
+    #log_file = new_log(log_dir, current_log)
     print(log_file)
     print('Log file above')
     try:
