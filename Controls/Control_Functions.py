@@ -19,6 +19,11 @@ def interp_door_dict(fri_time_open, fre_time_open, dict, wait_time):
     fri_hits = sum(dict['fridge'])
     fre_hits = sum(dict['freezer'])
 
+    if fre_hits is 0:  # reset the open times if fridge open not detected
+        fre_time_open = 0
+    if fri_hits is 0:
+        fri_time_open = 0
+
     fri_time_open += wait_time * fri_hits
     fre_time_open += wait_time * fre_hits
 

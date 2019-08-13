@@ -2,6 +2,9 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import csv
 from datetime import datetime
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
+import numpy as np
 
 data_csv = '/home/ethan/Desktop/Test_csv.csv'
 temp = []
@@ -17,8 +20,20 @@ with open(data_csv, mode='r') as data:
 
 
 def plot_and_humidity(data_csv):
-    points = [i for i in range(len(time))]
-    lines = plt.plot(points, temp, points, hum)
+    points = time_converter(time)
+    plt.subplot(1, 2, 1)
+    plt.plot(points, temp, label='Temperature, C', c='skyblue')
+    plt.title('Fridge Temperature Over 8 Hours')
+    plt.xlabel('Time in Hours')
+    plt.ylabel('Temperature, C')
+
+    plt.subplot(1, 2, 2)
+    plt.plot(points, hum, label='Humidity, %', c='tan')
+    plt.title('Fridge Humidity Over 8 Hours')
+    plt.ylabel('% Humidity')
+    plt.xlabel('Time in Hours')
+    #plt.legend(loc='upper left')
+    #plt.xlabel('Time in Hours')
     plt.show()
 
 def time_converter(times):
@@ -34,8 +49,6 @@ def time_converter(times):
 
     return new_times
 
-
-
 plot_and_humidity('/home/ethan/Desktop/Test_csv.csv')
 
 def scatter(data_csv):
@@ -45,21 +58,23 @@ def scatter(data_csv):
     plt.xlabel('Fridge Temperature (C)')
     plt.show()
 
+scatter(data_csv)
+
 
 def going_higher():
     fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
+    ax = plt.axes(projection='3d')
 
-    x = temp
-    z = hum
-    y = time_converter(time)
-    print(z[0])
-
-    ax.scatter(x, y, z, c='g', marker='o', s=10)
+    Y = temp
+    Z = hum
+    X = time_converter(time)
+    X, Y = np.meshgrid(X, Y)
+    ax.contour3D(X, Y, Z, 50, cmap='binary')
 
     ax.set_xlabel('Temperature, C')
     ax.set_ylabel('Time, 24hr')
     ax.set_zlabel('Humidity, %')
 
     plt.show()
+
 going_higher()
