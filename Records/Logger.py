@@ -50,10 +50,8 @@ def logger(log_dir, current_log, row):
     be created.
     '''
     #log_file = new_log(log_dir, current_log)
-    print(log_file)
-    print('Log file above')
     try:
-        with open(log_file, 'a') as log_file:
+        with open(current_log, 'a') as log_file:
             writer = csv.writer(log_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             writer.writerow(row)
     except FileNotFoundError as e:
