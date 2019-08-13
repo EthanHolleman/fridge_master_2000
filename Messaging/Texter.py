@@ -18,16 +18,16 @@ def compose_warnings(emergency_temp=False,
                      temp=None,
                      open_time=None):
 
-    message_base = 'BEEP BEEP\nFridge Master 2000 Warning\n'
+    message_base = 'BEEP BOOP\nFridge Master 2000 Warning!\n'
     warning = ''
     if emergency_temp is True:
-        warning = '{}Temp is above 60, currently @ {}'.format(message_base, temp)
+        warning = '{}Temp is currently @ {}'.format(message_base, temp)
     elif emergency_fridge is True:
-        warning = '{}Fridge open for > 15 mins, currently open for {}'.format(
-            message_base, open_time)
+        warning = '{}Fridge has been open for {} minutes'.format(
+            message_base, float(open_time)/60)
     elif emergency_freezer is True:
-        warning = '{}Freezer open for > 15 mins, currently open for {}'.format(
-            message_base, open_time)
+        warning = '{}Freezer open for {} minutes'.format(
+            message_base, float(open_time)/60)
     return warning
 
 

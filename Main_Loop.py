@@ -30,7 +30,7 @@ DHT = DHT_22(pin=2)
 
 # sensor constants
 MAX_TEMP = 60  # degrees C
-MAX_OPEN = 300  # seconds
+MAX_OPEN = 600  # seconds
 FRIDGE_OPEN_CODE = 0
 FREEZ_OPEN_CODE = 1
 WARN_WAIT = 600  # seconds
@@ -105,6 +105,7 @@ while True:
     allow = allow_warning(last_warning, WARN_WAIT)  # boolean
     print('Allow  Warning: {} '.format(allow))
     print('Fridge Open: {} \n Freezer Time Open {}'.format(fri_time_open, fre_time_open))
+
     if allow is True:
         if left_open is True:
             if open_code == 0:
