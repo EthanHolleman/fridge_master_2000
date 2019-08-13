@@ -13,6 +13,7 @@ Currently Fridge Master 2000 is able to
 ## Image of FRIDGE MASTER 2000
 ![IMG_2816](https://user-images.githubusercontent.com/45807040/62834803-ed6a9b80-bc16-11e9-845e-3e3089cc9ee2.jpg)
 
+
 # Design Details 
 The images below are accurate to the FRIDGE MASTER design except the push switches are being used as stand ins for the magetic contact switches as the are functionally almost identical.
 The images below are also included in the Fritzing_Exports directory along with a bill of materials.
@@ -26,6 +27,8 @@ The images below are also included in the Fritzing_Exports directory along with 
 
 ![mastermatic](https://user-images.githubusercontent.com/45807040/62887392-c25d7600-bd02-11e9-897b-03a98d74ef3a.png)
 
+# Plots
+![first_8](https://user-images.githubusercontent.com/45807040/62898348-df9e3e80-bd1a-11e9-8f3c-12d350136d2f.png)
 
 
 Powered by raspberry pi zero 
