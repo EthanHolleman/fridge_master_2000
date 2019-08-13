@@ -36,17 +36,20 @@ FREEZ_OPEN_CODE = 1
 WARN_WAIT = 600  # seconds
 WAIT = 4  # seconds
 
+# increasing the WAIT is main way of increasing / decreasing the frequency
+# that data is written to logs and the length it remains on the LCD
+
 # file directories
-LOG_DIR = '/home/pi/FTP/files'  # add before running
+LOG_DIR = '/home/pi/FTP/files'  # add before running should be absolute
 log_file = os.path.join(LOG_DIR, str(datetime.datetime.now().date()) + '.csv')
+# set first log file name as the current date, follows this convention
+# for all subsequent logs
 
 # loop variables
 last_warning = 0.0
 fre_time_open = 0
 fri_time_open = 0
 loop_counter = 0
-
-
 
 while True:
     open_dict = {'fridge': [], 'freezer': []}
@@ -89,12 +92,6 @@ while True:
                                                     open_dict,
                                                     WAIT)
 
-    #fre_time_open, fri_time_open = door_timer(fridge,  # find time doors open
-    #                                          freezer,
-    #                                          fre_time_open,
-    #                                          fri_time_open,
-    #                                          differnece)
-
     # add open times to loop data
     loop_data.append(fre_time_open)
     loop_data.append(fri_time_open)
@@ -104,7 +101,8 @@ while True:
     # check if doors have been open longer than allowed
     allow = allow_warning(last_warning, WARN_WAIT)  # boolean
     print('Allow  Warning: {} '.format(allow))
-    print('Fridge Open: {} \n Freezer Time Open {}'.format(fri_time_open, fre_time_open))
+    print('Fridge Open: {} \n Freezer Time Open {}'.format(
+        fri_time_open, fre_time_open))
 
     if allow is True:
         if left_open is True:
@@ -118,9 +116,8 @@ while True:
             last_warning = time.perf_counter()  # update time of last warning
 
     loop_counter += 1
-    #check_log_exists(log_file)
     log_file = new_log(LOG_DIR, log_file)
-    logger(LOG_DIR, log_file, loop_data)
+    logger(log_file, loop_data)
     # all data collected in loop_data written here
     # current data format for entry
     # date, time, fridge, freezer, hum, temp, fre_time_open, fri_time_open

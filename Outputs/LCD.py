@@ -18,7 +18,8 @@ class LCD():
         self.d6 = d6
         self.d7 = d7
         self.backlight = backlight
-        self.display = Ada_LCD.Adafruit_CharLCD(rs, en, d4, d5, d6, d7, cols, rows, backlight)
+        self.display = Ada_LCD.Adafruit_CharLCD(
+            rs, en, d4, d5, d6, d7, cols, rows, backlight)
 
     def print_temp_hum(self, temp, humidity, display_time=0, clear=True):
         message = 'Temp = {}\nHumidity = {}'.format(temp, humidity)
@@ -63,7 +64,7 @@ class LCD():
         elif rand is maybe:
             self.display.message('ARE FEELINGS\nWORTH IT?')
         if rand is 1 or rand is 2 or rand is 3 or rand is 4:
-       	    self.wait_clear(WAIT)
+            self.wait_clear(WAIT)
 
     def wait_clear(self, display_time):
         time.sleep(display_time)
