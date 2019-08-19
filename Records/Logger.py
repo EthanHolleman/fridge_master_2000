@@ -43,7 +43,7 @@ def check_log_exists(log_file):
             writer.writerow(HEADER)
 
 
-def logger(log_dir, current_log, row):
+def logger(current_log, row):
     '''
     Main logging functionality. Writes entries into the current log file and
     calls new_log to determine if the date has changed and a new log file should

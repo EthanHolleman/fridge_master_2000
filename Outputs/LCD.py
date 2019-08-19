@@ -1,9 +1,12 @@
 import time
 import random
 import datetime
-import Adafruit_CharLCD as Ada_LCD
 import subprocess
+import Adafruit_CharLCD as Ada_LCD
+
 from Controls.Control_Functions import c_to_f
+from Stats.Stats import yesterday_high_temp
+from Stats.Stats import yesterday_opens
 
 
 class LCD():
@@ -66,6 +69,41 @@ class LCD():
         if rand is 1 or rand is 2 or rand is 3 or rand is 4:
             self.wait_clear(WAIT)
 
+    def print_yesterday_high(self,
+                             temp_header,
+                             log_dir,
+                             display_time=0,
+                             clear=True):
+        high_temp = yesterday_high_temp(log_dir, temp_header)
+        self.display.message('Yesterday High\n{} F'.format(high_temp))
+        if clear is True:
+            self.wait_clear(display_time)
+
+    def print_yesterday_opens(self,
+                              open_headers_list,
+                              log_dir,
+                              display_time=0,
+                              clear=True):
+
+        fre_opens, fri_opens = (yesterday_opens(log_dir, open_headers_list))
+        self.display.message('# Fridge Opens\nYesterday: {}'.format(fri_opens))
+        time.sleep(3)
+        self.display.clear()
+        self.display.message('# Freezer Opens\nYesterday: {}'.format(fre_opens))
+        if clear is True:
+            self.wait_clear(display_time)
+            
+    def print_lifetime_opens():
+        pass
+
     def wait_clear(self, display_time):
         time.sleep(display_time)
         self.display.clear()
+
+    def print_all_stats(self,
+                        temp_header,
+                        open_headers_list,
+                        log_dir,
+                        display_time=0,
+                        clear=True):
+        pass

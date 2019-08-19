@@ -9,6 +9,9 @@ AUTH_TOKEN = os.environ.get('FRIDGE_AUTH')
 
 
 def get_client():
+    '''
+    Uses the declared enviromental variables to return a Twilio Client object
+    '''
     return Client(ACCOUNT_SID, AUTH_TOKEN)
 
 
@@ -17,6 +20,9 @@ def compose_warnings(emergency_temp=False,
                      emergency_freezer=False,
                      temp=None,
                      open_time=None):
+    '''
+    Returns string with warning based on booleans given
+    '''
 
     message_base = 'BEEP BOOP\nFridge Master 2000 Warning!\n'
     warning = ''
@@ -32,5 +38,8 @@ def compose_warnings(emergency_temp=False,
 
 
 def send_warnings(message, client):
+    '''
+    Uses Twilio client to send SMS message
+    '''
     print(message)
     client.messages.create(body=message, from_=TWILIO_NUMBER, to=NUMBER)

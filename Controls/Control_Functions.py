@@ -4,9 +4,15 @@ import time
 from Messaging.Texter import *
 
 def c_to_f(temp):
+    '''
+    Convert temp in C to F, sorry metric system forgive me.
+    '''
     return (temp * 1.8) + 32
 
 def read_doors(fridge, freezer):
+    '''
+    Read the current state of fridge and freezer door sensors.
+    '''
     return tuple([fridge.get_state(), freezer.get_state()])
 
 def append_door_read(dict, fridge_sensor, freezer_sensor):

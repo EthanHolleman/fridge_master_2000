@@ -1,15 +1,20 @@
+#!/usr/bin/env python3
+
+import time
+import datetime
+
 from Sensors.DHT_22 import DHT_22
 from Sensors.Door_Sensor import Door_sensor
 from Controls.Control_Functions import *
-from Outputs.LCD import LCD
 from Messaging.Texter import *
 from Records.Logger import *
-import RPi.GPIO as GPIO
-import time
-import datetime
-import Adafruit_CharLCD as Ada_LCD
 
-GPIO.setmode(GPIO.BCM)  # set pin labeling scheme DO NOT CHANGE
+from Outputs.LCD import LCD
+import Adafruit_CharLCD as Ada_LCD
+import RPi.GPIO as GPIO
+
+
+GPIO.setmode(GPIO.BCM)  # set pin labeling scheme PLEASE GOD, DO NOT CHANGE!
 
 # intialize all sensor objects
 lcd_rs = 25
