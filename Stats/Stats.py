@@ -10,13 +10,15 @@ def get_log_column(log_path, column_header):
     '''
     try:
         data = []
-        with open(log_path, 'r'):
+        with open(log_path) as log_path:
             reader = csv.DictReader(log_path)
             for row in reader:
                 data.append(row[column_header])
+
         return data
     except FileNotFoundError as e:
         return e
+
 
 
 def get_log_columns(log_path, *args):
@@ -27,7 +29,7 @@ def get_log_columns(log_path, *args):
     '''
     data_dick = dict(zip(args, [[] for i in range(0, len(args))]))
     try:
-        with open(log_path, 'r'):
+        with open(log_path, 'r') as log_path:
             reader = csv.DictReader(log_path)
             for row in reader:
                 for key in data_dick:
@@ -45,7 +47,7 @@ def get_yesterday_log(log_dir):
     that would have been created on the previous day. Does not currently check
     if that log file actually exists. This is doen in other functions.
     '''
-    previous_date = datetime.date.today() - datetime.timedelta(1)
+    previous_date = datetime.date.today()-datetime.timedelta(1)
     return os.path.join(log_dir, str(previous_date) + '.csv')
 
 
@@ -63,14 +65,17 @@ def yesterday_high_temp(log_dir, temp_header):
         return 'LOG NOT FOUND'
 
 
-def yesterday_opens(log_dir, open_headers_list):
+def yesterday_opens(log_dir, *args):
     # number of opens are returned based on the order of the headers given
     # if fridge opens header is provided first in list it will be returned
     # as the first value in the tuple.
+
+    # idea that you use the name of the current log to get the previous one
     previous_log = get_yesterday_log(log_dir)
-    data = get_log_columns(previous_log, open_headers_list)
+    print(previous_log)
+    data = get_log_columns(previous_log, *args)
     if data is not FileNotFoundError:
-        sums = [sum(data[key]) for key in data]
+        sums = [sum(int(x) for x in data[key]) for key in data]
         return tuple(sums)
     else:
         return tuple(['LOG NOT FOUND', 'LOG NOT FOUND'])
@@ -78,6 +83,7 @@ def yesterday_opens(log_dir, open_headers_list):
     # the messages can be displayed on screen without terminating the
     # main loop
 
+print(yesterday_opens('/home/ethan/Desktop/', 'Fri_Sensor', 'Fre_Sensor'))
 
 def get_lifetime_opens():
     pass

@@ -84,7 +84,7 @@ class LCD():
 
         fre_opens, fri_opens = (yesterday_opens(log_dir, open_headers_list))
         self.display.message('# Fridge Opens\nYesterday: {}'.format(fri_opens))
-        time.sleep(3)
+        time.sleep(4)
         self.display.clear()
         self.display.message(
             '# Freezer Opens\nYesterday: {}'.format(fre_opens))
