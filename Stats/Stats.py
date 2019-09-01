@@ -4,6 +4,10 @@ import csv
 
 
 def get_log_column(log_path, column_header):
+    '''
+    Given the log path and a header returns a list of the data in the column
+    identified to that header.
+    '''
     try:
         data = []
         with open(log_path, 'r'):
@@ -14,7 +18,13 @@ def get_log_column(log_path, column_header):
     except FileNotFoundError as e:
         return e
 
+
 def get_log_columns(log_path, *args):
+    '''
+    Same idea as get_log_column but is able to return column for as many headers
+    as there are in the cscv file being read. Returns a dictionary of lists,
+    where keys are the headers and lists contain data under those headers.
+    '''
     data_dick = dict(zip(args, [[] for i in range(0, len(args))]))
     try:
         with open(log_path, 'r'):
@@ -30,11 +40,21 @@ def get_log_columns(log_path, *args):
 
 
 def get_yesterday_log(log_dir):
-    previous_date = datetime.date.today()-datetime.timedelta(1)
+    '''
+    Given the directory where log files are stored, returns the path to log file
+    that would have been created on the previous day. Does not currently check
+    if that log file actually exists. This is doen in other functions.
+    '''
+    previous_date = datetime.date.today() - datetime.timedelta(1)
     return os.path.join(log_dir, str(previous_date) + '.csv')
 
 
 def yesterday_high_temp(log_dir, temp_header):
+    '''
+    Returns the recorded high temp from the log file recorded on the previous
+    date. If that file does not exist returns string warning that can be printed
+    to the LCD.
+    '''
     temp_data = get_log_column(get_yesterday_log(log_dir), temp_header)
     if temp_data is not FileNotFoundError:
         temp_data = [float(x) for x in temp_data]
@@ -58,10 +78,12 @@ def yesterday_opens(log_dir, open_headers_list):
     # the messages can be displayed on screen without terminating the
     # main loop
 
+
 def get_lifetime_opens():
     pass
     # return dictionary with date from logfile name and number times freezer
     # and fridge has been opened
+
 
 def get_lifetime_opens_high():
     pass
@@ -69,4 +91,3 @@ def get_lifetime_opens_high():
     Use the output of get_lifetime_opens to find the day with the greatest
     number of Opens
     '''
-    

@@ -3,11 +3,13 @@ import subprocess
 import time
 from Messaging.Texter import *
 
+
 def c_to_f(temp):
     '''
     Convert temp in C to F, sorry metric system forgive me.
     '''
     return (temp * 1.8) + 32
+
 
 def read_doors(fridge, freezer):
     '''
@@ -15,11 +17,13 @@ def read_doors(fridge, freezer):
     '''
     return tuple([fridge.get_state(), freezer.get_state()])
 
+
 def append_door_read(dict, fridge_sensor, freezer_sensor):
     fridge, freezer = read_doors(fridge_sensor, freezer_sensor)
     dict['fridge'].append(fridge)
     dict['freezer'].append(freezer)
     return dict
+
 
 def interp_door_dict(fri_time_open, fre_time_open, dict, wait_time):
     fri_hits = sum(dict['fridge'])
@@ -34,6 +38,7 @@ def interp_door_dict(fri_time_open, fre_time_open, dict, wait_time):
     fre_time_open += wait_time * fre_hits
 
     return tuple([fre_time_open, fri_time_open])
+
 
 def read_all_sensors(fridge_sensor, freezer_sensor, DHT):
     fridge_state = fridge_sensor.get_state()
@@ -86,7 +91,8 @@ def allow_warning(last_warning, wait_time):
 def alarm(fre_alarm=False, fri_alarm=False, temp_alarm=False, temp=None, open_time=None):
     pending_alarms = ''
     if fre_alarm is True:
-        pending_alarms = compose_warnings(emergency_freezer=True, open_time=open_time)
+        pending_alarms = compose_warnings(
+            emergency_freezer=True, open_time=open_time)
     elif fri_alarm is True:
         pending_alarms = compose_warnings(emergency_fridge=True,
                                           open_time=open_time)

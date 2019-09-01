@@ -89,10 +89,11 @@ class LCD():
         self.display.message('# Fridge Opens\nYesterday: {}'.format(fri_opens))
         time.sleep(3)
         self.display.clear()
-        self.display.message('# Freezer Opens\nYesterday: {}'.format(fre_opens))
+        self.display.message(
+            '# Freezer Opens\nYesterday: {}'.format(fre_opens))
         if clear is True:
             self.wait_clear(display_time)
-            
+
     def print_lifetime_opens():
         pass
 

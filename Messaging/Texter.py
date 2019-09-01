@@ -30,10 +30,10 @@ def compose_warnings(emergency_temp=False,
         warning = '{}Temp is currently @ {}'.format(message_base, temp)
     elif emergency_fridge is True:
         warning = '{}Fridge has been open for {} minutes'.format(
-            message_base, float(open_time)/60)
+            message_base, float(open_time) / 60)
     elif emergency_freezer is True:
         warning = '{}Freezer open for {} minutes'.format(
-            message_base, float(open_time)/60)
+            message_base, float(open_time) / 60)
     return warning
 
 
