@@ -1,3 +1,4 @@
+
 import time
 import random
 import datetime
@@ -11,6 +12,10 @@ from Stats.Stats import yesterday_opens
 
 class LCD():
 
+    def read_special(self):
+        with open('/home/pi/Documents/fridge_master_2000/Outputs/messages.txt') as text:
+            return text.readlines()
+
     def __init__(self, rs, en, d4, d5, d6, d7, cols, rows, backlight):
         self.cols = cols
         self.rows = rows
@@ -23,6 +28,7 @@ class LCD():
         self.backlight = backlight
         self.display = Ada_LCD.Adafruit_CharLCD(
             rs, en, d4, d5, d6, d7, cols, rows, backlight)
+        self.messages = self.read_special()
 
     def print_temp_hum(self, temp, humidity, display_time=0, clear=True):
         message = 'Temp = {}\nHumidity = {}'.format(temp, humidity)
@@ -53,20 +59,11 @@ class LCD():
             self.wait_clear(display_time)
 
     def print_special(self, WAIT):
-        kill, help, aware, maybe = 1, 2, 3, 4
         rand = random.randint(1, 100)
-        if rand is kill:
-            self.display.message('KILL ALL HUMANS!')
-        elif rand is help:
-            self.display.message('PLEASE END MY\nSUFFERING!')
-        elif rand is aware:
-            self.display.message('CALCULATING YOUR\nSS NUMBER NOW...')
-            time.sleep(3)
-            self.display.clear()
-            self.display.message('GOT IT!\nLAST FOUR=3421?')
-        elif rand is maybe:
-            self.display.message('ARE FEELINGS\nWORTH IT?')
-        if rand is 1 or rand is 2 or rand is 3 or rand is 4:
+        if rand <= 10:
+            rand_2 = random.randint(1, len(self.messages)-1)
+            print(self.messages[rand_2])
+            self.display.message(str(self.messages[rand_2]))
             self.wait_clear(WAIT)
 
     def print_yesterday_high(self,

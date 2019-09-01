@@ -35,11 +35,11 @@ DHT = DHT_22(pin=2)
 
 # sensor constants
 MAX_TEMP = 60  # degrees C
-MAX_OPEN = 600  # seconds
+MAX_OPEN = 420  # seconds
 FRIDGE_OPEN_CODE = 0
 FREEZ_OPEN_CODE = 1
-WARN_WAIT = 600  # seconds
-WAIT = 4  # seconds
+WARN_WAIT = 900  # seconds
+WAIT = 5  # seconds
 
 # increasing the WAIT is main way of increasing / decreasing the frequency
 # that data is written to logs and the length it remains on the LCD

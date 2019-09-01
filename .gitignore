@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 # Ignore txt files
+=======
+# ignore txt files
+>>>>>>> 2b86843983a9d9ed99095df6330d75b7f94c8358
 *.txt
 
