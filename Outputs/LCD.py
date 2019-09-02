@@ -77,12 +77,12 @@ class LCD():
             self.wait_clear(display_time)
 
     def print_yesterday_opens(self,
-                              open_headers_list,
                               log_dir,
                               display_time=0,
-                              clear=True):
+                              clear=True,
+                              *args):
 
-        fre_opens, fri_opens = (yesterday_opens(log_dir, open_headers_list))
+        fre_opens, fri_opens = (yesterday_opens(log_dir, *args))
         self.display.message('# Fridge Opens\nYesterday: {}'.format(fri_opens))
         time.sleep(4)
         self.display.clear()

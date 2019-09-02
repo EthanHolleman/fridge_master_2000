@@ -75,15 +75,23 @@ while True:
 
     start_time = time.perf_counter()
     lcd.display.clear()
+
     lcd.print_temp_hum(temp, hum, display_time=WAIT)
     append_door_read(open_dict, fridge_sensor, freezer_sensor)
+
     lcd.print_time(display_time=WAIT)
     open_dict = append_door_read(open_dict, fridge_sensor, freezer_sensor)
+
     lcd.print_pi_info(display_time=WAIT)
     open_dict = append_door_read(open_dict, fridge_sensor, freezer_sensor)
+
+    lcd.print_yesterday_opens(LOG_DIR, 'Fre_Sensor', 'Fri_Sensor', display_time=WAIT)
+    open_dict = append_door_read(open_dict, fridge_sensor, freezer_sensor)
+
     lcd.print_special(WAIT)
     open_dict = append_door_read(open_dict, fridge_sensor, freezer_sensor)
     # clear == False so logo remains while rest loop runs
+
     lcd.print_logo(display_time=WAIT, clear=True)
     open_dict = append_door_read(open_dict, fridge_sensor, freezer_sensor)
 
