@@ -78,8 +78,8 @@ class LCD():
 
     def print_yesterday_opens(self,
                               log_dir,
-                              display_time=0,
-                              clear=True,
+                              display_time,
+                              clear,
                               *args):
 
         fre_opens, fri_opens = (yesterday_opens(log_dir, *args))

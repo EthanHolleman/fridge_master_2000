@@ -85,7 +85,7 @@ while True:
     lcd.print_pi_info(display_time=WAIT)
     open_dict = append_door_read(open_dict, fridge_sensor, freezer_sensor)
 
-    lcd.print_yesterday_opens(LOG_DIR, 'Fre_Sensor', 'Fri_Sensor', display_time=WAIT)
+    lcd.print_yesterday_opens(LOG_DIR, WAIT, True, 'Fre_Sensor', 'Fri_Sensor',)
     open_dict = append_door_read(open_dict, fridge_sensor, freezer_sensor)
 
     lcd.print_special(WAIT)
