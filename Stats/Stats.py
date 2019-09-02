@@ -73,6 +73,7 @@ def yesterday_opens(log_dir, *args):
     # idea that you use the name of the current log to get the previous one
     previous_log = get_yesterday_log(log_dir)
     print(previous_log)
+    print('--------------------------')
     data = get_log_columns(previous_log, *args)
     if data is not FileNotFoundError:
         sums = [sum(int(x) for x in data[key]) for key in data]
@@ -82,8 +83,6 @@ def yesterday_opens(log_dir, *args):
     # if error log not found messages returned in LCD printable format so
     # the messages can be displayed on screen without terminating the
     # main loop
-
-print(yesterday_opens('/home/ethan/Desktop/', 'Fri_Sensor', 'Fre_Sensor'))
 
 def get_lifetime_opens():
     pass
